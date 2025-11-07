@@ -1,47 +1,48 @@
-💼 Tarjeta de Presentación Responsiva con Jetpack Compose
+# 💼 Tarjeta de Presentación Responsiva (Jetpack Compose)
 
-Esta aplicación implementa una Tarjeta de Presentación digital (Business Card) en Android utilizando Jetpack Compose. Su característica principal es el diseño responsivo, que adapta completamente el layout de la tarjeta a la orientación o tamaño de la pantalla (móvil vs. tablet).
+Este proyecto desarrolla una Tarjeta de Presentación digital (Business Card) en Android utilizando **Jetpack Compose**. La funcionalidad central es el **diseño responsivo**, que adapta automáticamente la interfaz de usuario a la orientación y al tamaño de la pantalla.
 
-✨ Características Destacadas
+---
 
-Diseño Responsivo Dinámico: La función TarjetaPersonal utiliza BoxWithConstraints para detectar el ancho disponible (maxWidth) y renderizar automáticamente un diseño vertical (< 500.dp) o un diseño horizontal (>= 500.dp).
+## ✨ Características Destacadas
 
-Interactividad con Intents: Los datos de contacto no son simples textos, sino botones funcionales (TextButton) que lanzan acciones nativas de Android:
+* **Diseño Adaptativo con BoxWithConstraints:**
+    * La función `TarjetaPersonal` evalúa el ancho de la pantalla (`maxWidth`).
+    * Cambia el layout entre el modo **Vertical** (para móviles) y **Horizontal** (para tablets o pantallas anchas) de forma dinámica.
+* **Interactividad y Manejo de Intents:** Los botones de contacto lanzan acciones nativas de Android, haciendo la tarjeta totalmente funcional:
+    * 📞 **Teléfono:** Utiliza `Intent.ACTION_DIAL` para iniciar una llamada.
+    * 📸 **Instagram:** Utiliza `Intent.ACTION_VIEW` para abrir el perfil en el navegador.
+    * 📧 **Email:** Utiliza `Intent.ACTION_SEND` para abrir el cliente de correo.
+* **Estilo UI/UX:**
+    * Uso de `CircleShape` para la foto de perfil.
+    * Enlaces de contacto visualmente resaltados (subrayados y de color azul).
 
-📞 Teléfono: Llama al número (Intent.ACTION_DIAL).
+---
 
-📸 Instagram: Abre el perfil web (Intent.ACTION_VIEW).
+## 📐 Estructura de Componentes
 
-📧 Email: Abre la aplicación de correo para enviar un nuevo email (Intent.ACTION_SEND).
+| Componente | Uso Principal |
+| :--- | :--- |
+| `TarjetaPersonalVertical` | Layout apilado, optimizado para la orientación vertical o pantallas pequeñas. |
+| `TarjetaPersonalHorizontal` | Layout dividido en secciones, optimizado para la orientación horizontal o pantallas grandes. |
+| `Boton...` (Varios) | Encapsulan la lógica del `TextButton` y el lanzamiento del `Intent` asociado. |
 
-Estilo Moderno: La foto de perfil se recorta en un círculo (.clip(CircleShape)).
+---
 
-Modularidad: El código está organizado en componentes Composable específicos (BotonNumeroVertical, BotonEmailHorizontal, etc.), facilitando el mantenimiento y la lectura.
+## 🚀 Uso del Componente
 
-📐 Estructura de los Layouts
+Simplemente llama al componente principal en tu `MainActivity` e inyecta los datos:
 
-Modo Vertical (Móvil)
-
-Prioriza la información del perfil en la parte superior y apila los contactos en la parte inferior. Utiliza Image para el fondo.
-
-Modo Horizontal (Tablet/Desktop)
-
-Divide la pantalla para mostrar la información personal y los datos de contacto uno al lado del otro, aprovechando el espacio horizontal.
-
-🚀 Uso del Componente
-
-Para instanciar la tarjeta en tu MainActivity:
-
+```kotlin
 TarjetaPersonal(
     telefono = "333 333 333",
-    pagina = "panchomalillos", // Instagram
+    pagina = "panchomalillos", 
     email = "panchomalilloss@gmail.com",
-    nombre = "Francisco Malillos Castellano", // Usamos 'nombre' como en tu código original
+    name = "Francisco Malillos Castellano", 
     estudio = "Estudiante de ingeniería informática",
     instituto = "Universidad de Las Palmas de Gran Canaria",
     curso = "4º Curso",
     ciudad = "Las Palmas de Gran Canaria"
 )
-
-
-Nota: Se requiere tener imágenes llamadas descarga, telefono, instanuevo__1_, email, y fondotp2 en la carpeta res/drawable de tu proyecto para que compile correctamente.
+```
+Nota: Para que el proyecto compile, asegúrate de que todas las imágenes referenciadas (descarga, telefono, instanuevo__1_, email, fondotp2) se encuentren en la carpeta res/drawable.
